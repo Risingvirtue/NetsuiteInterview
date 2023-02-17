@@ -6,7 +6,7 @@ define(['N/search'],
     function(search) {
        
         // Get an invoice
-        function get(context) {
+        function getInvoiceData(context) {
 			var invoiceNumber = context.request.parameters.invoicenumber;
 			//validate invoice number
 			if (!invoiceNumber) {
@@ -41,6 +41,6 @@ define(['N/search'],
         }
         
         return {
-            get: get
+            get: getInvoiceData
         };
     });
