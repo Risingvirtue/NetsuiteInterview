@@ -2,8 +2,8 @@
  *@NApiVersion 2.x
  *@NScriptType Restlet
  */
-define(['N/record', 'N/task'],
-    function(record, task) {
+define(['N/search'],
+    function(search) {
        
         // Get an invoice
         function get(context) {
@@ -18,7 +18,7 @@ define(['N/record', 'N/task'],
 							{name: 'entity'}, //customer
 							{name: 'subsidiary'},
 							{name: 'total'}];
-			var filters = [{name: 'tranid', operator: 'anyof', values: [location]}];
+			var filters = [{name: 'tranid', operator: 'is', values: [invoiceNumber]}];
 			var searchResult = search.create({
 				type: 'invoice',
 				columns: columns,
@@ -30,10 +30,10 @@ define(['N/record', 'N/task'],
 			} else if (results.length == 1) {
 				return {
 					'internalid': results[0].getValue({name: 'internalid'}),
-					'invoicenumber': results[0].getValue({name: 'tranid'}),
+					'invoice_number': results[0].getValue({name: 'tranid'}),
 					'customer': results[0].getValue({name: 'entity'}),
 					'subsidiary': results[0].getValue({name: 'subsidiary'}),
-					'totalamount': results[0].getValue({name: 'total'})
+					'total_amount': results[0].getValue({name: 'total'})
 				}
 			} else {
 				return "Multiple invoices found.";
